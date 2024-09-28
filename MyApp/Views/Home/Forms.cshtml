@@ -1,0 +1,44 @@
+﻿@model MyApp.ViewModels.UserViewModel
+
+@{
+ViewData["Title"] = "Counter";
+}
+
+<div class="text-center">
+    <h1>Forms</h1>
+</div>
+
+<form asp-action="Forms" method="post" v-on:submit.prevent="addItem">
+    <div class="form-group mb-2">
+        <label asp-for="Name"></label>
+        <input asp-for="Name" class="form-control" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Save</button>
+</form>
+
+
+
+@* Create mixin *@
+@section Scripts {
+    @* <script> *@
+    @*      *@
+    @*     const pageMixin = { *@
+    @*         data() { *@
+    @*             return { *@
+    @*                 count: 0 *@
+    @*             }; *@
+    @*         }, *@
+    @*         methods: { *@
+    @*             increment() { *@
+    @*                 this.count++; *@
+    @*             }, *@
+    @*             decrement() { *@
+    @*                 this.count--; *@
+    @*             } *@
+    @*         } *@
+    @*     }; *@
+    @* *@
+    @* </script> *@
+}

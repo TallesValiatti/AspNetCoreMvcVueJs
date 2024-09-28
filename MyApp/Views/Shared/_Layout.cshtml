@@ -49,8 +49,14 @@
 <script src="~/lib/jquery/dist/jquery.min.js"></script>
 <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 
-@* Add Vue 3 CDN *@
-<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+@* Add Vue *@
+<script type="importmap">
+    {
+      "imports": {
+        "vue": "https://cdnjs.cloudflare.com/ajax/libs/vue/3.4.21/vue.esm-browser.prod.min.js"
+      }
+    }
+</script>
 
 @* Components *@
 <script src="~/js/components/countComponent.js" asp-append-version="true" type="module"></script>
@@ -58,23 +64,20 @@
 <script src="~/js/site.js" asp-append-version="true"></script>
 @await RenderSectionAsync("Scripts", required: false)
 
-@* Vue app*@
+@* Vue app *@
 <script type="module">
-    import CountComponent from '@Url.Content("/js/components/countComponent.js")'; 
-    const app = Vue.createApp({
+    import { createApp } from 'vue';
+    import CountComponent from '@Url.Content("/js/components/countComponent.js")';
+    
+    const app = createApp({
         mixins: [pageMixin],
         components: {
+            // Register the components here
             'count-component': CountComponent
         }
     });
 
     app.mount('#app');
 </script>
-@* <script type="text/javascript"> *@
-@*     const app = Vue.createApp({ *@
-@*         mixins: [pageMixin] *@
-@*     }); *@
-@*     app.mount('#app'); *@
-@* </script> *@
 </body>
 </html>

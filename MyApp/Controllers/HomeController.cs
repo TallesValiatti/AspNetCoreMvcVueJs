@@ -1,6 +1,7 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using MyApp.Models;
+using MyApp.ViewModels;
 
 namespace MyApp.Controllers;
 
@@ -21,6 +22,18 @@ public class HomeController(ILogger<HomeController> logger) : Controller
     public IActionResult Forms()
     {
         return View();
+    }
+    
+    [HttpPost]
+    public IActionResult Forms(UserViewModel viewModel)
+    {
+        if (ModelState.IsValid)
+        {
+            return RedirectToAction(nameof(Index));
+        }
+
+        // If validation fails, return to the view
+        return View(viewModel);
     }
 
     public IActionResult Privacy()
