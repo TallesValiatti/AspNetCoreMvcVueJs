@@ -3,14 +3,8 @@ ViewData["Title"] = "Counter";
 }
 
 <div class="text-center">
-    <h1>Simple Counter</h1>
-    <div id="app">
-        <h2>{{ count }}</h2>
-        <div class="d-flex justify-content-center gap-2">
-            <button v-on:click="increment" class="btn btn-primary">Increment</button>
-            <button v-on:click="decrement" class="btn btn-danger">Decrement</button>
-        </div>
-    </div>
+    <h1>Components</h1>
+    <count-component></count-component>
 </div>
 
 @* Create mixin *@

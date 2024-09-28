@@ -20,10 +20,13 @@
             <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                 <ul class="navbar-nav flex-grow-1">
                     <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Basic usage</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Components">Components</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Forms">Forms</a>
                     </li>
                 </ul>
             </div>
@@ -32,7 +35,9 @@
 </header>
 <div class="container">
     <main role="main" class="pb-3">
-        @RenderBody()
+        <div id="app">
+            @RenderBody()
+        </div>
     </main>
 </div>
 
@@ -43,7 +48,33 @@
 </footer>
 <script src="~/lib/jquery/dist/jquery.min.js"></script>
 <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
+@* Add Vue 3 CDN *@
+<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
+@* Components *@
+<script src="~/js/components/countComponent.js" asp-append-version="true" type="module"></script>
+
 <script src="~/js/site.js" asp-append-version="true"></script>
 @await RenderSectionAsync("Scripts", required: false)
+
+@* Vue app*@
+<script type="module">
+    import CountComponent from '@Url.Content("/js/components/countComponent.js")'; 
+    const app = Vue.createApp({
+        mixins: [pageMixin],
+        components: {
+            'count-component': CountComponent
+        }
+    });
+
+    app.mount('#app');
+</script>
+@* <script type="text/javascript"> *@
+@*     const app = Vue.createApp({ *@
+@*         mixins: [pageMixin] *@
+@*     }); *@
+@*     app.mount('#app'); *@
+@* </script> *@
 </body>
 </html>
