@@ -1,4 +1,6 @@
-﻿@model MyApp.ViewModels.UserViewModel
+﻿@model MyApp.ViewModels.ItemsViewModel
+
+@* https://codepen.io/mikesoriano/pen/dJdexe *@
 
 @{
 ViewData["Title"] = "Counter";
@@ -8,37 +10,49 @@ ViewData["Title"] = "Counter";
     <h1>Forms</h1>
 </div>
 
-<form asp-action="Forms" method="post" v-on:submit.prevent="addItem">
-    <div class="form-group mb-2">
-        <label asp-for="Name"></label>
-        <input asp-for="Name" class="form-control" />
-        <span asp-validation-for="Name" class="text-danger"></span>
-    </div>
+<form v-on:submit.prevent="addItem">
+    <div class="form-group">
+        <p>Item name: <input class="form-control" type="text" required v-model="itemName"></p>
 
-    <button type="submit" class="btn btn-primary">Save</button>
+        <div v-show="items.length > 0">
+            <p>Items:</p>
+            <ul>
+                <li v-for="item in items">{{item}}</li>
+            </ul>
+        </div>
+
+        <button class="btn btn-secondary" type="submit">Add item</button>
+    </div>
 </form>
 
-
+<form asp-action="Forms">
+    <input type="hidden" asp-for="Items" :value="concatenatedItems" />
+    <button class="btn btn-primary mt-2">Save</button>
+</form>
 
 @* Create mixin *@
 @section Scripts {
-    @* <script> *@
-    @*      *@
-    @*     const pageMixin = { *@
-    @*         data() { *@
-    @*             return { *@
-    @*                 count: 0 *@
-    @*             }; *@
-    @*         }, *@
-    @*         methods: { *@
-    @*             increment() { *@
-    @*                 this.count++; *@
-    @*             }, *@
-    @*             decrement() { *@
-    @*                 this.count--; *@
-    @*             } *@
-    @*         } *@
-    @*     }; *@
-    @* *@
-    @* </script> *@
+    <script>
+    
+        const pageMixin = {
+            data() {
+                return {
+                    itemName: null,
+                    items: []
+                }
+            },
+            computed: {
+                concatenatedItems() {
+                    return this.items.join(';');
+                }
+            },
+            methods: {
+                addItem() {
+                    this.items.push(this.itemName);
+                    this.itemName = null;
+                }
+            }
+        };
+    
+    </script>
 }

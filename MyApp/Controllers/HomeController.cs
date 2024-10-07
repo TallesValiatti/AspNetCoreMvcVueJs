@@ -25,7 +25,7 @@ public class HomeController(ILogger<HomeController> logger) : Controller
     }
     
     [HttpPost]
-    public IActionResult Forms(UserViewModel viewModel)
+    public IActionResult Forms(ItemsViewModel viewModel)
     {
         if (ModelState.IsValid)
         {

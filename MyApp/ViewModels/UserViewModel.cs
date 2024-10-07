@@ -1,6 +1,6 @@
 namespace MyApp.ViewModels;
 
-public class UserViewModel
+public class ItemsViewModel
 {
-    public string? Name { get; init; }
+    public string? Items { get; init; }
 }
